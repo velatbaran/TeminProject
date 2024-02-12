@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TeminDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Firmalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirmaAd" Type="nvarchar(max)" />
+          <Property Name="YetkiliKisi" Type="nvarchar" MaxLength="100" />
+          <Property Name="FirmaTuru" Type="int" />
+          <Property Name="SicilNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="VergiDairesi" Type="nvarchar" MaxLength="100" />
+          <Property Name="VergiNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="TcNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="WebAdresi" Type="nvarchar" MaxLength="50" />
+          <Property Name="BankaAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="SubeAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="HesapOrIbanNo" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FirmaTurleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirmaTurAd" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Teminler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DosyaNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsinAdi" Type="nvarchar(max)" />
+          <Property Name="IsiYapanFirma" Type="int" Nullable="false" />
+          <Property Name="TeminSekli" Type="int" Nullable="false" />
+          <Property Name="TeminTuru" Type="int" Nullable="false" />
+          <Property Name="TeminTipi" Type="int" Nullable="false" />
+          <Property Name="Aciklama" Type="nvarchar(max)" />
+          <Property Name="DosyaYolu" Type="nvarchar(max)" />
+          <Property Name="TeminTarihi" Type="datetime" />
+          <Property Name="FaturaTutar" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeminSekilleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SekilAd" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TeminTipleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipAd" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TeminTürleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurAd" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Firmalar_FirmaTurleri">
+          <End Role="FirmaTurleri" Type="Self.FirmaTurleri" Multiplicity="0..1" />
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirmaTurleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Firmalar">
+              <PropertyRef Name="FirmaTuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="IsiYapanFirma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_TeminSekilleri">
+          <End Role="TeminSekilleri" Type="Self.TeminSekilleri" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeminSekilleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="TeminSekli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_TeminTipleri">
+          <End Role="TeminTipleri" Type="Self.TeminTipleri" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeminTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="TeminTipi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_TeminTürleri">
+          <End Role="TeminTürleri" Type="Self.TeminTürleri" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeminTürleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="TeminTuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TeminDbModelStoreContainer">
+          <EntitySet Name="Firmalar" EntityType="Self.Firmalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FirmaTurleri" EntityType="Self.FirmaTurleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teminler" EntityType="Self.Teminler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeminSekilleri" EntityType="Self.TeminSekilleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeminTipleri" EntityType="Self.TeminTipleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeminTürleri" EntityType="Self.TeminTürleri" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Firmalar_FirmaTurleri" Association="Self.FK_Firmalar_FirmaTurleri">
+            <End Role="FirmaTurleri" EntitySet="FirmaTurleri" />
+            <End Role="Firmalar" EntitySet="Firmalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_Firmalar" Association="Self.FK_Teminler_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_TeminSekilleri" Association="Self.FK_Teminler_TeminSekilleri">
+            <End Role="TeminSekilleri" EntitySet="TeminSekilleri" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_TeminTipleri" Association="Self.FK_Teminler_TeminTipleri">
+            <End Role="TeminTipleri" EntitySet="TeminTipleri" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_TeminTürleri" Association="Self.FK_Teminler_TeminTürleri">
+            <End Role="TeminTürleri" EntitySet="TeminTürleri" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TeminDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Firmalar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirmaAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YetkiliKisi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirmaTuru" Type="Int32" />
+          <Property Name="SicilNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VergiDairesi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VergiNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TcNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WebAdresi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BankaAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubeAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HesapOrIbanNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FirmaTurleri" Relationship="Self.FK_Firmalar_FirmaTurleri" FromRole="Firmalar" ToRole="FirmaTurleri" />
+          <NavigationProperty Name="Teminler" Relationship="Self.FK_Teminler_Firmalar" FromRole="Firmalar" ToRole="Teminler" />
+        </EntityType>
+        <EntityType Name="FirmaTurleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirmaTurAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Firmalar_FirmaTurleri" FromRole="FirmaTurleri" ToRole="Firmalar" />
+        </EntityType>
+        <EntityType Name="Teminler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DosyaNo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsinAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsiYapanFirma" Type="Int32" Nullable="false" />
+          <Property Name="TeminSekli" Type="Int32" Nullable="false" />
+          <Property Name="TeminTuru" Type="Int32" Nullable="false" />
+          <Property Name="TeminTipi" Type="Int32" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DosyaYolu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TeminTarihi" Type="DateTime" Precision="3" />
+          <Property Name="KayitTarihi" Type="DateTime" Precision="3" Nullable="false" />
+          <NavigationProperty Name="Firmalar" Relationship="Self.FK_Teminler_Firmalar" FromRole="Teminler" ToRole="Firmalar" />
+          <NavigationProperty Name="TeminSekilleri" Relationship="Self.FK_Teminler_TeminSekilleri" FromRole="Teminler" ToRole="TeminSekilleri" />
+          <NavigationProperty Name="TeminTipleri" Relationship="Self.FK_Teminler_TeminTipleri" FromRole="Teminler" ToRole="TeminTipleri" />
+          <NavigationProperty Name="TeminTürleri" Relationship="Self.FK_Teminler_TeminTürleri" FromRole="Teminler" ToRole="TeminTürleri" />
+          <Property Name="FaturaTutar" Type="Decimal" Precision="18" Scale="4" />
+        </EntityType>
+        <EntityType Name="TeminSekilleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SekilAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teminler" Relationship="Self.FK_Teminler_TeminSekilleri" FromRole="TeminSekilleri" ToRole="Teminler" />
+        </EntityType>
+        <EntityType Name="TeminTipleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teminler" Relationship="Self.FK_Teminler_TeminTipleri" FromRole="TeminTipleri" ToRole="Teminler" />
+        </EntityType>
+        <EntityType Name="TeminTürleri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurAd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teminler" Relationship="Self.FK_Teminler_TeminTürleri" FromRole="TeminTürleri" ToRole="Teminler" />
+        </EntityType>
+        <Association Name="FK_Firmalar_FirmaTurleri">
+          <End Role="FirmaTurleri" Type="Self.FirmaTurleri" Multiplicity="0..1" />
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FirmaTurleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Firmalar">
+              <PropertyRef Name="FirmaTuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_Firmalar">
+          <End Role="Firmalar" Type="Self.Firmalar" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Firmalar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="IsiYapanFirma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_TeminSekilleri">
+          <End Role="TeminSekilleri" Type="Self.TeminSekilleri" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeminSekilleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="TeminSekli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_TeminTipleri">
+          <End Role="TeminTipleri" Type="Self.TeminTipleri" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeminTipleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="TeminTipi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teminler_TeminTürleri">
+          <End Role="TeminTürleri" Type="Self.TeminTürleri" Multiplicity="1" />
+          <End Role="Teminler" Type="Self.Teminler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeminTürleri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teminler">
+              <PropertyRef Name="TeminTuru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TeminDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Firmalar" EntityType="Self.Firmalar" />
+          <EntitySet Name="FirmaTurleri" EntityType="Self.FirmaTurleri" />
+          <EntitySet Name="Teminler" EntityType="Self.Teminler" />
+          <EntitySet Name="TeminSekilleri" EntityType="Self.TeminSekilleri" />
+          <EntitySet Name="TeminTipleri" EntityType="Self.TeminTipleri" />
+          <EntitySet Name="TeminTürleri" EntityType="Self.TeminTürleri" />
+          <AssociationSet Name="FK_Firmalar_FirmaTurleri" Association="Self.FK_Firmalar_FirmaTurleri">
+            <End Role="FirmaTurleri" EntitySet="FirmaTurleri" />
+            <End Role="Firmalar" EntitySet="Firmalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_Firmalar" Association="Self.FK_Teminler_Firmalar">
+            <End Role="Firmalar" EntitySet="Firmalar" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_TeminSekilleri" Association="Self.FK_Teminler_TeminSekilleri">
+            <End Role="TeminSekilleri" EntitySet="TeminSekilleri" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_TeminTipleri" Association="Self.FK_Teminler_TeminTipleri">
+            <End Role="TeminTipleri" EntitySet="TeminTipleri" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teminler_TeminTürleri" Association="Self.FK_Teminler_TeminTürleri">
+            <End Role="TeminTürleri" EntitySet="TeminTürleri" />
+            <End Role="Teminler" EntitySet="Teminler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TeminDbModelStoreContainer" CdmEntityContainer="TeminDbEntities">
+          <EntitySetMapping Name="Firmalar">
+            <EntityTypeMapping TypeName="TeminDbModel.Firmalar">
+              <MappingFragment StoreEntitySet="Firmalar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirmaAd" ColumnName="FirmaAd" />
+                <ScalarProperty Name="YetkiliKisi" ColumnName="YetkiliKisi" />
+                <ScalarProperty Name="FirmaTuru" ColumnName="FirmaTuru" />
+                <ScalarProperty Name="SicilNo" ColumnName="SicilNo" />
+                <ScalarProperty Name="VergiDairesi" ColumnName="VergiDairesi" />
+                <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+                <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="WebAdresi" ColumnName="WebAdresi" />
+                <ScalarProperty Name="BankaAdi" ColumnName="BankaAdi" />
+                <ScalarProperty Name="SubeAdi" ColumnName="SubeAdi" />
+                <ScalarProperty Name="HesapOrIbanNo" ColumnName="HesapOrIbanNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FirmaTurleri">
+            <EntityTypeMapping TypeName="TeminDbModel.FirmaTurleri">
+              <MappingFragment StoreEntitySet="FirmaTurleri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirmaTurAd" ColumnName="FirmaTurAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teminler">
+            <EntityTypeMapping TypeName="TeminDbModel.Teminler">
+              <MappingFragment StoreEntitySet="Teminler">
+                <ScalarProperty Name="FaturaTutar" ColumnName="FaturaTutar" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DosyaNo" ColumnName="DosyaNo" />
+                <ScalarProperty Name="IsinAdi" ColumnName="IsinAdi" />
+                <ScalarProperty Name="IsiYapanFirma" ColumnName="IsiYapanFirma" />
+                <ScalarProperty Name="TeminSekli" ColumnName="TeminSekli" />
+                <ScalarProperty Name="TeminTuru" ColumnName="TeminTuru" />
+                <ScalarProperty Name="TeminTipi" ColumnName="TeminTipi" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="DosyaYolu" ColumnName="DosyaYolu" />
+                <ScalarProperty Name="TeminTarihi" ColumnName="TeminTarihi" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeminSekilleri">
+            <EntityTypeMapping TypeName="TeminDbModel.TeminSekilleri">
+              <MappingFragment StoreEntitySet="TeminSekilleri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SekilAd" ColumnName="SekilAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeminTipleri">
+            <EntityTypeMapping TypeName="TeminDbModel.TeminTipleri">
+              <MappingFragment StoreEntitySet="TeminTipleri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipAd" ColumnName="TipAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeminTürleri">
+            <EntityTypeMapping TypeName="TeminDbModel.TeminTürleri">
+              <MappingFragment StoreEntitySet="TeminTürleri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TurAd" ColumnName="TurAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

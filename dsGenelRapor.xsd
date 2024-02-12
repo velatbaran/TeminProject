@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsGenelRapor" targetNamespace="http://tempuri.org/dsGenelRapor.xsd" xmlns:mstns="http://tempuri.org/dsGenelRapor.xsd" xmlns="http://tempuri.org/dsGenelRapor.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TeminDbConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TeminDbConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TeminProject.Properties.Settings.GlobalReference.Default.TeminDbConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="TeminDbConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Firmalar.FirmaAd, TeminTipleri.TipAd, TeminSekilleri.SekilAd, TeminTürleri.TurAd, Teminler.DosyaNo, Teminler.IsinAdi, Teminler.DosyaYolu, Teminler.TeminTarihi, Teminler.FaturaTutar
+FROM            Firmalar INNER JOIN
+                         FirmaTurleri ON Firmalar.FirmaTuru = FirmaTurleri.Id INNER JOIN
+                         Teminler ON Firmalar.Id = Teminler.IsiYapanFirma INNER JOIN
+                         TeminSekilleri ON Teminler.TeminSekli = TeminSekilleri.Id INNER JOIN
+                         TeminTipleri ON Teminler.TeminTipi = TeminTipleri.Id INNER JOIN
+                         TeminTürleri ON Teminler.TeminTuru = TeminTürleri.Id</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="FirmaAd" DataSetColumn="FirmaAd" />
+              <Mapping SourceColumn="TipAd" DataSetColumn="TipAd" />
+              <Mapping SourceColumn="SekilAd" DataSetColumn="SekilAd" />
+              <Mapping SourceColumn="TurAd" DataSetColumn="TurAd" />
+              <Mapping SourceColumn="DosyaNo" DataSetColumn="DosyaNo" />
+              <Mapping SourceColumn="IsinAdi" DataSetColumn="IsinAdi" />
+              <Mapping SourceColumn="DosyaYolu" DataSetColumn="DosyaYolu" />
+              <Mapping SourceColumn="TeminTarihi" DataSetColumn="TeminTarihi" />
+              <Mapping SourceColumn="FaturaTutar" DataSetColumn="FaturaTutar" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsGenelRapor" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsGenelRapor" msprop:Generator_UserDSName="dsGenelRapor">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FirmaAd" msprop:Generator_ColumnVarNameInTable="columnFirmaAd" msprop:Generator_ColumnPropNameInRow="FirmaAd" msprop:Generator_ColumnPropNameInTable="FirmaAdColumn" msprop:Generator_UserColumnName="FirmaAd" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipAd" msprop:Generator_ColumnVarNameInTable="columnTipAd" msprop:Generator_ColumnPropNameInRow="TipAd" msprop:Generator_ColumnPropNameInTable="TipAdColumn" msprop:Generator_UserColumnName="TipAd" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SekilAd" msprop:Generator_ColumnVarNameInTable="columnSekilAd" msprop:Generator_ColumnPropNameInRow="SekilAd" msprop:Generator_ColumnPropNameInTable="SekilAdColumn" msprop:Generator_UserColumnName="SekilAd" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TurAd" msprop:Generator_ColumnVarNameInTable="columnTurAd" msprop:Generator_ColumnPropNameInRow="TurAd" msprop:Generator_ColumnPropNameInTable="TurAdColumn" msprop:Generator_UserColumnName="TurAd" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DosyaNo" msprop:Generator_ColumnVarNameInTable="columnDosyaNo" msprop:Generator_ColumnPropNameInRow="DosyaNo" msprop:Generator_ColumnPropNameInTable="DosyaNoColumn" msprop:Generator_UserColumnName="DosyaNo" type="xs:string" minOccurs="0" />
+              <xs:element name="IsinAdi" msprop:Generator_ColumnVarNameInTable="columnIsinAdi" msprop:Generator_ColumnPropNameInRow="IsinAdi" msprop:Generator_ColumnPropNameInTable="IsinAdiColumn" msprop:Generator_UserColumnName="IsinAdi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DosyaYolu" msprop:Generator_ColumnVarNameInTable="columnDosyaYolu" msprop:Generator_ColumnPropNameInRow="DosyaYolu" msprop:Generator_ColumnPropNameInTable="DosyaYoluColumn" msprop:Generator_UserColumnName="DosyaYolu" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TeminTarihi" msprop:Generator_ColumnVarNameInTable="columnTeminTarihi" msprop:Generator_ColumnPropNameInRow="TeminTarihi" msprop:Generator_ColumnPropNameInTable="TeminTarihiColumn" msprop:Generator_UserColumnName="TeminTarihi" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="FaturaTutar" msprop:Generator_ColumnVarNameInTable="columnFaturaTutar" msprop:Generator_ColumnPropNameInRow="FaturaTutar" msprop:Generator_ColumnPropNameInTable="FaturaTutarColumn" msprop:Generator_UserColumnName="FaturaTutar" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

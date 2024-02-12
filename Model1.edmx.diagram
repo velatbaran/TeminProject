@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c6a3a03f9e544e908e7863ac033fca17" Name="Diagram1">
+        <EntityTypeShape EntityType="TeminDbModel.Firmalar" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeminDbModel.FirmaTurleri" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeminDbModel.Teminler" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeminDbModel.TeminSekilleri" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeminDbModel.TeminTipleri" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeminDbModel.TeminTürleri" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <AssociationConnector Association="TeminDbModel.FK_Firmalar_FirmaTurleri" ManuallyRouted="false" />
+        <AssociationConnector Association="TeminDbModel.FK_Teminler_Firmalar" ManuallyRouted="false" />
+        <AssociationConnector Association="TeminDbModel.FK_Teminler_TeminSekilleri" ManuallyRouted="false" />
+        <AssociationConnector Association="TeminDbModel.FK_Teminler_TeminTipleri" ManuallyRouted="false" />
+        <AssociationConnector Association="TeminDbModel.FK_Teminler_TeminTürleri" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
