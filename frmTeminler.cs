@@ -76,7 +76,7 @@ namespace TeminProject
             //gridTeminler.DataSource = (from k in db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri").ToList()
             //                          select new { k.Id, k.DosyaNo, k.IsinAdi, k.Firmalar.FirmaAd, k.TeminSekilleri.SekilAd, k.TeminTürleri.TurAd, k.TeminTipleri.TipAd }).ToList();
             gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                        .Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd,x.TeminTarihi ,x.FaturaTutar}).ToList();
+                                        .Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd,x.TeminTarihi ,x.FaturaTutar}).OrderByDescending(x=>x.TeminTarihi).ToList();
             lblToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
         }
 
@@ -136,7 +136,7 @@ namespace TeminProject
                         TümTeminler();
                     else
                         gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                                                .Where(x => x.Firmalar.FirmaAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd,x.TeminTarihi, x.FaturaTutar }).ToList();
+                                                                .Where(x => x.Firmalar.FirmaAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd,x.TeminTarihi, x.FaturaTutar }).OrderByDescending(x => x.TeminTarihi).ToList();
 
                 }
                 else if (rdIsinAdi.Checked == true)
@@ -145,7 +145,7 @@ namespace TeminProject
                         TümTeminler();
                     else
                         gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                                            .Where(x => x.IsinAdi.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).ToList();
+                                                            .Where(x => x.IsinAdi.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).OrderByDescending(x => x.TeminTarihi).ToList();
                 }
                 else if (rdTeminSekli.Checked == true)
                 {
@@ -153,7 +153,7 @@ namespace TeminProject
                         TümTeminler();
                     else
                         gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                                            .Where(x => x.TeminSekilleri.SekilAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).ToList();
+                                                            .Where(x => x.TeminSekilleri.SekilAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).OrderByDescending(x => x.TeminTarihi).ToList();
                 }
                 else if (rdTeminTipi.Checked == true)
                 {
@@ -161,7 +161,7 @@ namespace TeminProject
                         TümTeminler();
                     else
                         gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                                            .Where(x => x.TeminTipleri.TipAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).ToList();
+                                                            .Where(x => x.TeminTipleri.TipAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).OrderByDescending(x => x.TeminTarihi).ToList();
                 }
                 else if (rdTeminYili.Checked == true)
                 {
@@ -169,7 +169,7 @@ namespace TeminProject
                         TümTeminler();
                     else
                         gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                                            .Where(x => x.TeminTarihi.Value.Year.ToString().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).ToList();
+                                                            .Where(x => x.TeminTarihi.Value.Year.ToString().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).OrderByDescending(x => x.TeminTarihi).ToList();
                 }
                 else if (r5dTeminTuru.Checked == true)
                 {
@@ -181,7 +181,7 @@ namespace TeminProject
                         TümTeminler();
                     else
                         gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
-                                                            .Where(x => x.TeminTürleri.TurAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).ToList();
+                                                            .Where(x => x.TeminTürleri.TurAd.ToLower().Contains(txtTeminAra.Text.ToLower())).Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd, x.TeminTarihi, x.FaturaTutar }).OrderByDescending(x => x.TeminTarihi).ToList();
 
                 }
 
