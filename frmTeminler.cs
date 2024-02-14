@@ -68,16 +68,23 @@ namespace TeminProject
         private void frmTeminler_Load(object sender, EventArgs e)
         {
             TümTeminler();
-            lblToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+            txtToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
         }
 
         public void TümTeminler()
         {
+            decimal faturaToplam = 0;
             //gridTeminler.DataSource = (from k in db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri").ToList()
             //                          select new { k.Id, k.DosyaNo, k.IsinAdi, k.Firmalar.FirmaAd, k.TeminSekilleri.SekilAd, k.TeminTürleri.TurAd, k.TeminTipleri.TipAd }).ToList();
             gridTeminler.DataSource = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri")
                                         .Select(x => new { x.Id, x.DosyaNo, x.IsinAdi, x.Firmalar.FirmaAd, x.TeminSekilleri.SekilAd, x.TeminTürleri.TurAd, x.TeminTipleri.TipAd,x.TeminTarihi ,x.FaturaTutar}).OrderByDescending(x=>x.TeminTarihi).ToList();
-            lblToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+           // txtToplamFatura.Text = db.Teminler.Include("Firmalar").Include("TeminSekilleri").Include("TeminTipleri").Include("TeminTürleri").Sum(x => x.FaturaTutar).ToString();
+            txtToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+            for (int i = 0; i < gridTeminler.Rows.Count; i++)
+            {
+                faturaToplam += Convert.ToDecimal(gridTeminler.Rows[i].Cells[8].Value);
+            }
+            txtToplamFatura.Text = faturaToplam.ToString();
         }
 
         private void btnFirmaEkle_Click(object sender, EventArgs e)
@@ -185,7 +192,14 @@ namespace TeminProject
 
                 }
 
-                lblToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+                txtToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+                decimal _faturaToplam = 0;
+                for (int i = 0; i < gridTeminler.Rows.Count; i++)
+                {
+                    _faturaToplam += Convert.ToDecimal(gridTeminler.Rows[i].Cells[8].Value);
+                }
+                txtToplamFatura.Text = _faturaToplam.ToString();
+
             }
             catch (Exception ex)
             {
@@ -195,8 +209,14 @@ namespace TeminProject
 
         private void güncelleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            decimal __faturaToplam = 0;
             TümTeminler();
-            lblToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+            txtToplamKayit.Text = Convert.ToString(gridTeminler.Rows.Count);
+            for (int i = 0; i < gridTeminler.Rows.Count; i++)
+            {
+                __faturaToplam += Convert.ToDecimal(gridTeminler.Rows[i].Cells[8].Value);
+            }
+            txtToplamFatura.Text = __faturaToplam.ToString();
         }
 
         private void btnFirmaRaporAl_Click(object sender, EventArgs e)

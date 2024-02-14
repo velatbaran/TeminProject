@@ -63,6 +63,7 @@ namespace TeminProject
             txtDosyaYolu.Clear();
             txtIsinAdi.Clear();
             txtFaturaTutari.Clear();
+            lblTeminId.Text = "";
             dateTimePicker1.Text = DateTime.Now.ToString();
         }
 
@@ -122,35 +123,43 @@ namespace TeminProject
         {
             int _id = Convert.ToInt32(lblTeminId.Text);
             var temin = db.Teminler.Find(_id);
-            if (string.IsNullOrEmpty(txtDosyaNo.Text) == true || string.IsNullOrEmpty(txtDosyaYolu.Text) == true || cmbTeminTuru.Text == "seçiniz..." || string.IsNullOrEmpty(txtIsinAdi.Text) == true || cmbTeminTipi.Text == "seçiniz..." || cmbTeminSekli.Text == "seçiniz..." || cmbFirmaAdi.Text == "seçiniz..." || string.IsNullOrEmpty(txtFaturaTutari.Text) == true)
+            if (temin == null)
             {
-                MessageBox.Show("Lütfen zorunlu alanları doldurunuz!", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Lütfen bir kayıt seçiniz!", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-               // int dosyaNo = Convert.ToInt32(txtDosyaNo.Text);
-                if (db.Teminler.Any(x => x.DosyaNo == txtDosyaNo.Text && x.Id != _id))
+                if (string.IsNullOrEmpty(txtDosyaNo.Text) == true || string.IsNullOrEmpty(txtDosyaYolu.Text) == true || cmbTeminTuru.Text == "seçiniz..." || string.IsNullOrEmpty(txtIsinAdi.Text) == true || cmbTeminTipi.Text == "seçiniz..." || cmbTeminSekli.Text == "seçiniz..." || cmbFirmaAdi.Text == "seçiniz..." || string.IsNullOrEmpty(txtFaturaTutari.Text) == true)
                 {
-                    MessageBox.Show("Aynı Dosya No' ya sahip kayıt zaten var.", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Lütfen zorunlu alanları doldurunuz!", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    temin.DosyaNo = txtDosyaNo.Text;
-                    temin.IsinAdi = txtIsinAdi.Text;
-                    temin.IsiYapanFirma = Convert.ToInt32(cmbFirmaAdi.SelectedValue);
-                    temin.TeminSekli = Convert.ToInt32(cmbTeminSekli.SelectedValue);
-                    temin.TeminTipi = Convert.ToInt32(cmbTeminTipi.SelectedValue);
-                    temin.TeminTuru = Convert.ToInt32(cmbTeminTuru.SelectedValue);
-                    temin.Aciklama = txtAciklama.Text;
-                    temin.DosyaYolu = txtDosyaYolu.Text;
-                    temin.TeminTarihi = dateTimePicker1.Value;
-                    temin.FaturaTutar = Convert.ToDecimal(txtFaturaTutari.Text);
-                    db.SaveChanges();
-                    Temizle();
-                    TümTeminleriGetir();
-                    MessageBox.Show("Güncelleme işlemi başarıyla gerçekleşti", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // int dosyaNo = Convert.ToInt32(txtDosyaNo.Text);
+                    if (db.Teminler.Any(x => x.DosyaNo == txtDosyaNo.Text && x.Id != _id))
+                    {
+                        MessageBox.Show("Aynı Dosya No' ya sahip kayıt zaten var.", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        temin.DosyaNo = txtDosyaNo.Text;
+                        temin.IsinAdi = txtIsinAdi.Text;
+                        temin.IsiYapanFirma = Convert.ToInt32(cmbFirmaAdi.SelectedValue);
+                        temin.TeminSekli = Convert.ToInt32(cmbTeminSekli.SelectedValue);
+                        temin.TeminTipi = Convert.ToInt32(cmbTeminTipi.SelectedValue);
+                        temin.TeminTuru = Convert.ToInt32(cmbTeminTuru.SelectedValue);
+                        temin.Aciklama = txtAciklama.Text;
+                        temin.DosyaYolu = txtDosyaYolu.Text;
+                        temin.TeminTarihi = dateTimePicker1.Value;
+                        temin.FaturaTutar = Convert.ToDecimal(txtFaturaTutari.Text);
+                        db.SaveChanges();
+                        Temizle();
+                        TümTeminleriGetir();
+                        MessageBox.Show("Güncelleme işlemi başarıyla gerçekleşti", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
+            
         }
     }
 }

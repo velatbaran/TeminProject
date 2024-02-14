@@ -30,7 +30,7 @@ namespace TeminProject
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTeminler));
             this.güncelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -62,7 +62,6 @@ namespace TeminProject
             this.rdFirma = new System.Windows.Forms.RadioButton();
             this.txtTeminAra = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblToplamKayit = new System.Windows.Forms.Label();
             this.btnFirmaDetay = new System.Windows.Forms.Button();
             this.btnFirmaRaporAl = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
@@ -70,6 +69,9 @@ namespace TeminProject
             this.btnfirmaGuncelle = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtToplamKayit = new System.Windows.Forms.TextBox();
+            this.txtToplamFatura = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridTeminler)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -110,13 +112,13 @@ namespace TeminProject
             this.gridTeminler.Location = new System.Drawing.Point(1, 25);
             this.gridTeminler.Name = "gridTeminler";
             this.gridTeminler.ReadOnly = true;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.gridTeminler.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            this.gridTeminler.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.gridTeminler.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridTeminler.Size = new System.Drawing.Size(1010, 417);
+            this.gridTeminler.Size = new System.Drawing.Size(1010, 464);
             this.gridTeminler.TabIndex = 25;
             // 
             // Id
@@ -367,20 +369,11 @@ namespace TeminProject
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1019, 368);
+            this.label1.Location = new System.Drawing.Point(1014, 368);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 13);
             this.label1.TabIndex = 35;
             this.label1.Text = "Toplam Kayıt Sayısı";
-            // 
-            // lblToplamKayit
-            // 
-            this.lblToplamKayit.AutoSize = true;
-            this.lblToplamKayit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblToplamKayit.Location = new System.Drawing.Point(1070, 385);
-            this.lblToplamKayit.Name = "lblToplamKayit";
-            this.lblToplamKayit.Size = new System.Drawing.Size(0, 13);
-            this.lblToplamKayit.TabIndex = 36;
             // 
             // btnFirmaDetay
             // 
@@ -408,7 +401,7 @@ namespace TeminProject
             this.btnFirmaRaporAl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnFirmaRaporAl.ForeColor = System.Drawing.Color.White;
             this.btnFirmaRaporAl.Image = ((System.Drawing.Image)(resources.GetObject("btnFirmaRaporAl.Image")));
-            this.btnFirmaRaporAl.Location = new System.Drawing.Point(1014, 402);
+            this.btnFirmaRaporAl.Location = new System.Drawing.Point(1012, 449);
             this.btnFirmaRaporAl.Name = "btnFirmaRaporAl";
             this.btnFirmaRaporAl.Size = new System.Drawing.Size(132, 38);
             this.btnFirmaRaporAl.TabIndex = 29;
@@ -482,13 +475,40 @@ namespace TeminProject
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1015, 408);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 13);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Toplam Fatura Tutarı";
+            // 
+            // txtToplamKayit
+            // 
+            this.txtToplamKayit.Enabled = false;
+            this.txtToplamKayit.Location = new System.Drawing.Point(1019, 385);
+            this.txtToplamKayit.Name = "txtToplamKayit";
+            this.txtToplamKayit.Size = new System.Drawing.Size(59, 20);
+            this.txtToplamKayit.TabIndex = 38;
+            // 
+            // txtToplamFatura
+            // 
+            this.txtToplamFatura.Enabled = false;
+            this.txtToplamFatura.Location = new System.Drawing.Point(1019, 424);
+            this.txtToplamFatura.Name = "txtToplamFatura";
+            this.txtToplamFatura.Size = new System.Drawing.Size(116, 20);
+            this.txtToplamFatura.TabIndex = 39;
+            // 
             // frmTeminler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
-            this.ClientSize = new System.Drawing.Size(1146, 444);
-            this.Controls.Add(this.lblToplamKayit);
+            this.ClientSize = new System.Drawing.Size(1146, 490);
+            this.Controls.Add(this.txtToplamFatura);
+            this.Controls.Add(this.txtToplamKayit);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grpArama);
             this.Controls.Add(this.btnFirmaDetay);
@@ -556,9 +576,11 @@ namespace TeminProject
         private System.Windows.Forms.DataGridViewTextBoxColumn TeminTarihi;
         private System.Windows.Forms.DataGridViewTextBoxColumn FaturaTutar;
         private System.Windows.Forms.ToolStripMenuItem istatistikleriGösterToolStripMenuItem;
-        public System.Windows.Forms.Label lblToplamKayit;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.RadioButton rdTeminYili;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtToplamKayit;
+        private System.Windows.Forms.TextBox txtToplamFatura;
     }
 }

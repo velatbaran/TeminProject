@@ -36,6 +36,7 @@ namespace TeminProject
             txtFirmaBankaAdi.Clear();
             txtSubeAdi.Clear();
             txtFirmaHesapNo.Clear();
+            lblFirmaId.Text = "";
         }
 
         private void btnFirmaVazgec_Click(object sender, EventArgs e)
@@ -95,43 +96,50 @@ namespace TeminProject
 
         private void btnFirmaGuncelle_Click(object sender, EventArgs e)
         {
-            var firma = db.Firmalar.Find(Convert.ToInt32(lblFirmaId.Text));
             int _id = Convert.ToInt32(lblFirmaId.Text);
-            if (string.IsNullOrEmpty(txtFirmaAd.Text) == true || string.IsNullOrEmpty(txtFirmaYetkiliKisi.Text) == true || cmbFirmaTürü.Text == "seçiniz..." || string.IsNullOrEmpty(txtFirmaTelefon.Text) == true || string.IsNullOrEmpty(txtFirmaSicilNo.Text) == true || string.IsNullOrEmpty(txtFirmaVergiDairesi.Text) == true || string.IsNullOrEmpty(txtFirmaVergiNo.Text) == true || string.IsNullOrEmpty(txtFirmaHesapNo.Text) == true || string.IsNullOrEmpty(txtFirmaEmail.Text) == true)
+            var firma = db.Firmalar.Find(_id);
+            if (firma == null)
             {
-                MessageBox.Show("Lütfen zorunlu alanları doldurunuz!", "Firma Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Lütfen bir kayıt seçiniz!", "Firma Güncellleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                if (db.Firmalar.Any(x => x.Id != _id && (x.SicilNo == txtFirmaSicilNo.Text || x.TcNo == txtFirmaTCKimlikNo.Text)))
+                if (string.IsNullOrEmpty(txtFirmaAd.Text) == true || string.IsNullOrEmpty(txtFirmaYetkiliKisi.Text) == true || cmbFirmaTürü.Text == "seçiniz..." || string.IsNullOrEmpty(txtFirmaTelefon.Text) == true || string.IsNullOrEmpty(txtFirmaSicilNo.Text) == true || string.IsNullOrEmpty(txtFirmaVergiDairesi.Text) == true || string.IsNullOrEmpty(txtFirmaVergiNo.Text) == true || string.IsNullOrEmpty(txtFirmaHesapNo.Text) == true || string.IsNullOrEmpty(txtFirmaEmail.Text) == true)
                 {
-                    if (db.Firmalar.Any(x => x.Id != _id && x.SicilNo == txtFirmaSicilNo.Text))
-                        MessageBox.Show("Aynı Sicil No' ya sahip kayıt zaten var.", "Firma Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (db.Firmalar.Any(x => x.Id != _id && x.TcNo == txtFirmaTCKimlikNo.Text))
-                        MessageBox.Show("Aynı TC No' ya sahip kayıt zaten var.", "Firma Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Lütfen zorunlu alanları doldurunuz!", "Firma Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    firma.FirmaAd = txtFirmaAd.Text;
-                    firma.YetkiliKisi = txtFirmaYetkiliKisi.Text;
-                    firma.FirmaTuru = Convert.ToInt32(cmbFirmaTürü.SelectedValue);
-                    firma.Telefon = txtFirmaTelefon.Text;
-                    firma.Adres = txtFirmaAdres.Text;
-                    firma.Email = txtFirmaEmail.Text;
-                    firma.WebAdresi = txtFirmaWebAdresi.Text;
-                    firma.SicilNo = txtFirmaSicilNo.Text;
-                    firma.VergiDairesi = txtFirmaVergiDairesi.Text;
-                    firma.VergiNo = txtFirmaVergiNo.Text;
-                    firma.TcNo = txtFirmaTCKimlikNo.Text;
-                    firma.BankaAdi = txtFirmaBankaAdi.Text;
-                    firma.SubeAdi = txtSubeAdi.Text;
-                    firma.HesapOrIbanNo = txtFirmaHesapNo.Text;
-                    db.SaveChanges();
-                    Temizle();
-                    TümFirmalariGetir();
-                    MessageBox.Show("Güncelleme işlemi başarıyla gerçekleşti", "Firma Güncellleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (db.Firmalar.Any(x => x.Id != _id && (x.SicilNo == txtFirmaSicilNo.Text || x.TcNo == txtFirmaTCKimlikNo.Text)))
+                    {
+                        if (db.Firmalar.Any(x => x.Id != _id && x.SicilNo == txtFirmaSicilNo.Text))
+                            MessageBox.Show("Aynı Sicil No' ya sahip kayıt zaten var.", "Firma Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (db.Firmalar.Any(x => x.Id != _id && x.TcNo == txtFirmaTCKimlikNo.Text))
+                            MessageBox.Show("Aynı TC No' ya sahip kayıt zaten var.", "Firma Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        firma.FirmaAd = txtFirmaAd.Text;
+                        firma.YetkiliKisi = txtFirmaYetkiliKisi.Text;
+                        firma.FirmaTuru = Convert.ToInt32(cmbFirmaTürü.SelectedValue);
+                        firma.Telefon = txtFirmaTelefon.Text;
+                        firma.Adres = txtFirmaAdres.Text;
+                        firma.Email = txtFirmaEmail.Text;
+                        firma.WebAdresi = txtFirmaWebAdresi.Text;
+                        firma.SicilNo = txtFirmaSicilNo.Text;
+                        firma.VergiDairesi = txtFirmaVergiDairesi.Text;
+                        firma.VergiNo = txtFirmaVergiNo.Text;
+                        firma.TcNo = txtFirmaTCKimlikNo.Text;
+                        firma.BankaAdi = txtFirmaBankaAdi.Text;
+                        firma.SubeAdi = txtSubeAdi.Text;
+                        firma.HesapOrIbanNo = txtFirmaHesapNo.Text;
+                        db.SaveChanges();
+                        Temizle();
+                        TümFirmalariGetir();
+                        MessageBox.Show("Güncelleme işlemi başarıyla gerçekleşti", "Firma Güncellleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-            }
+            }       
         }
 
         private void TümFirmalariGetir()
