@@ -27,7 +27,7 @@ namespace TeminProject
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Temin Ekleme Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Temin Güncelleme Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
                     e.Cancel = false;
@@ -121,9 +121,7 @@ namespace TeminProject
 
         private void btnTeminGuncelle_Click(object sender, EventArgs e)
         {
-            int _id = Convert.ToInt32(lblTeminId.Text);
-            var temin = db.Teminler.Find(_id);
-            if (temin == null)
+            if (lblTeminId.Text == "")
             {
                 MessageBox.Show("Lütfen bir kayıt seçiniz!", "Temin Güncelleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -135,6 +133,8 @@ namespace TeminProject
                 }
                 else
                 {
+                    int _id = Convert.ToInt32(lblTeminId.Text);
+                    var temin = db.Teminler.Find(_id);
                     // int dosyaNo = Convert.ToInt32(txtDosyaNo.Text);
                     if (db.Teminler.Any(x => x.DosyaNo == txtDosyaNo.Text && x.Id != _id))
                     {

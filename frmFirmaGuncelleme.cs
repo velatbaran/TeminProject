@@ -96,9 +96,7 @@ namespace TeminProject
 
         private void btnFirmaGuncelle_Click(object sender, EventArgs e)
         {
-            int _id = Convert.ToInt32(lblFirmaId.Text);
-            var firma = db.Firmalar.Find(_id);
-            if (firma == null)
+            if (lblFirmaId.Text == "")
             {
                 MessageBox.Show("Lütfen bir kayıt seçiniz!", "Firma Güncellleme Sayfası", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -110,6 +108,8 @@ namespace TeminProject
                 }
                 else
                 {
+                    int _id = Convert.ToInt32(lblFirmaId.Text);
+                    var firma = db.Firmalar.Find(_id);
                     if (db.Firmalar.Any(x => x.Id != _id && (x.SicilNo == txtFirmaSicilNo.Text || x.TcNo == txtFirmaTCKimlikNo.Text)))
                     {
                         if (db.Firmalar.Any(x => x.Id != _id && x.SicilNo == txtFirmaSicilNo.Text))
