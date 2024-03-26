@@ -89,12 +89,12 @@ namespace TeminProject
                     var firma = db.Firmalar.Find(id);
                     db.Firmalar.Remove(firma);
                     db.SaveChanges();
-                    MessageBox.Show("Firma silme işlemi başarılıyla gerçekleşti.");
+                    MessageBox.Show("Firma silme işlemi başarılıyla gerçekleşti.", "Firma Silme İşlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     TümFirmalar();
                 }
                 else
                 {
-                    MessageBox.Show("Silme işlemi iptal edildi!");
+                    MessageBox.Show("Silme işlemi iptal edildi!", "Firma Silme İşlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 }
             }
         }
@@ -119,7 +119,7 @@ namespace TeminProject
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Firma Ekleme Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Firmalar Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
                     e.Cancel = false;

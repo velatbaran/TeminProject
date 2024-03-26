@@ -52,7 +52,7 @@ namespace TeminProject
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Firma Ekleme Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Teminler Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
                     e.Cancel = false;
@@ -223,7 +223,7 @@ namespace TeminProject
         {
             if (gridTeminler.Rows.Count == 0)
             {
-                MessageBox.Show("Raporda gösterilecek ürün bulunamadı!");
+                MessageBox.Show("Raporda gösterilecek ürün bulunamadı!", "Teminler Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             }
             else
             {

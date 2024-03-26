@@ -22,6 +22,7 @@ namespace TeminProject
         private void btnFirmaVazgec_Click(object sender, EventArgs e)
         {
             this.Close();
+            TümFirmalariGetir();
         }
 
         private void frmFirmaEkle_FormClosing(object sender, FormClosingEventArgs e)

@@ -51,7 +51,7 @@ namespace TeminProject
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Firma Ekleme Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                dynamic result = MessageBox.Show("Çıkmak istiyor musunuz?", "Firma Detay Sayfası", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
                     e.Cancel = false;

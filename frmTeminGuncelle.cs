@@ -21,6 +21,7 @@ namespace TeminProject
         private void btnTeminVazgeç_Click(object sender, EventArgs e)
         {
             this.Close();
+            TümTeminleriGetir();
         }
 
         private void frmTeminGuncelle_FormClosing(object sender, FormClosingEventArgs e)

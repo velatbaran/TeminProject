@@ -61,6 +61,7 @@ namespace TeminProject
         private void btnFirmaVazgeç_Click(object sender, EventArgs e)
         {
             this.Close();
+            TümTeminleriGetir();
         }
 
         public void Temizle()
